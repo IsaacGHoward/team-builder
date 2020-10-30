@@ -20,6 +20,7 @@ function Form(props) {
               <input
                 type="text"
                 name="name"
+                value={newMember.name}
                 onChange={event => handleChange(event)}
               />
           </label><br/>
@@ -28,12 +29,13 @@ function Form(props) {
               <input
                 type="email"
                 name="email"
+                value={newMember.email}
                 onChange={event => handleChange(event)}
               />
           </label><br/>
           <label>
               Role:
-              <select name='role' onChange={event => handleChange(event)}> 
+              <select name='role' onChange={event => handleChange(event)} value={newMember.role}> 
                 <option value='Backend Engineer'>Backend Engineer</option>
                 <option value='Frontend Engineer'>Frontend Engineer</option>
                 <option value='UI Design'>UI Design</option>

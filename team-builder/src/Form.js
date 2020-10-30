@@ -1,21 +1,26 @@
 import React, {useState} from 'react';
 import './App.css';
 
-const handleSubmit = event => {
-    event.preventDefault();
-    
-};
-  
 function Form(props) {
-  const [newMember, setNewMember] = useState({name:'', email:'', role:''});
+  const [newMember, setNewMember] = useState({name:'', email:'', role:'Backend Engineer'});
+
+  const handleChange = event => {
+    setNewMember({ ...newMember, [event.target.name]: event.target.value });
+  };
+  const handleSubmit = event => {
+    event.preventDefault();
+    props.setTeam(newMember);
+  };
+
   return (
     <div className="App">
-      <form>
+      <form onSubmit={event => handleSubmit(event)}>
           <label>
               Name:
               <input
                 type="text"
                 name="name"
+                onChange={event => handleChange(event)}
               />
           </label><br/>
           <label>
@@ -23,11 +28,12 @@ function Form(props) {
               <input
                 type="email"
                 name="email"
+                onChange={event => handleChange(event)}
               />
           </label><br/>
           <label>
               Role:
-              <select name='role'>
+              <select name='role' onChange={event => handleChange(event)}> 
                 <option value='Backend Engineer'>Backend Engineer</option>
                 <option value='Frontend Engineer'>Frontend Engineer</option>
                 <option value='UI Design'>UI Design</option>

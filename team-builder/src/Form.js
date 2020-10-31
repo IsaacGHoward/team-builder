@@ -1,15 +1,23 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import './App.css';
 
 function Form(props) {
   const [newMember, setNewMember] = useState({name:'', email:'', role:'Backend Engineer'});
-
+  useEffect(() => {
+      console.log(props.teamMembers[props.editingMember]);
+    if(props.editingMember != null)
+        setNewMember(props.teamMembers[props.editingMember]);
+  }, [props.editingMember]);
   const handleChange = event => {
     setNewMember({ ...newMember, [event.target.name]: event.target.value });
   };
   const handleSubmit = event => {
     event.preventDefault();
-    props.setTeam(newMember);
+    if(props.editingMember == null)
+        props.setTeam(newMember);
+    else
+        props.updateTeam(newMember); 
+    setNewMember({name:'', email:'', role:'Backend Engineer'});
   };
 
   return (
